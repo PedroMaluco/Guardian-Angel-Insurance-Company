@@ -13,7 +13,6 @@ import java.util.UUID;
 @Setter
 public class CustomerInput {
 
-    private UUID id;
     @NotNull
     @NotBlank
     private String firstName;

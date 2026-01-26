@@ -21,7 +21,7 @@ public class CustomerService {
 
     private final CustomerRepository repository;
 
-    public String createCustomer(@RequestBody @Valid CustomerInput input) {
+    public Customer createCustomer(@RequestBody @Valid CustomerInput input) {
         Customer customer = Customer.newCustomer(
                 input.getFirstName(),
                 input.getSurName(),
@@ -31,7 +31,7 @@ public class CustomerService {
                 input.getGender()
         );
         repository.save(customer);
-        return "Customer created successfully";
+        return customer;
     }
 
     public String annexHouseInfoToCustomer(@RequestBody @Valid AddressInput input, UUID customerId){
