@@ -2,6 +2,7 @@ package com.guardianangel.customer.domain.service;
 
 import com.guardianangel.customer.api.models.AddressInput;
 import com.guardianangel.customer.api.models.CustomerInput;
+import com.guardianangel.customer.api.models.VehicleInfoInput;
 import com.guardianangel.customer.domain.exceptions.CustomerNotFoundException;
 import com.guardianangel.customer.domain.models.Address;
 import com.guardianangel.customer.domain.models.Customer;
@@ -12,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class CustomerService {
                 input.getGender()
         );
         repository.save(customer);
-        return "Customer created succesfully";
+        return "Customer created successfully";
     }
 
     public String annexHouseInfoToCustomer(@RequestBody @Valid AddressInput input, UUID customerId){
@@ -47,6 +47,19 @@ public class CustomerService {
         repository.save(customer);
 
         return "Address annexed to customer profile";
+    }
+
+    public String annexVehicleInfo(@RequestBody @Valid VehicleInfoInput input, UUID customerId) {
+        Customer customer = repository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
+        VehicleInfo vehicleInfo = VehicleInfo.declareAutoInfo(
+                input.getDriverLicenseCode(),
+                input.getVehicleIdentificationNumber(),
+                input.getAnnualMileage()
+        );
+        customer.setVehicleInfo(vehicleInfo);
+        repository.save(customer);
+
+        return "Vehicle Information annexed to customer profile";
     }
 
 }
