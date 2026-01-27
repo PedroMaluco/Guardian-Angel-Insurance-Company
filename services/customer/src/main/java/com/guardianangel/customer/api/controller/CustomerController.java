@@ -3,7 +3,6 @@ package com.guardianangel.customer.api.controller;
 import com.guardianangel.customer.api.models.CustomerInput;
 import com.guardianangel.customer.domain.models.Customer;
 import com.guardianangel.customer.domain.service.CustomerService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +17,10 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @PostMapping(name = "/add")
-    public ResponseEntity<Customer> newCustomer(@RequestBody @Valid CustomerInput input){
+    @PostMapping("/add")
+    public ResponseEntity<Customer> newCustomer(@RequestBody CustomerInput input){
         Customer customer = customerService.createCustomer(input);
         return ResponseEntity.ok(customer);
+
     }
 }

@@ -23,6 +23,7 @@ public class CustomerService {
 
     public Customer createCustomer(@RequestBody @Valid CustomerInput input) {
         Customer customer = Customer.newCustomer(
+                input.getId(),
                 input.getFirstName(),
                 input.getSurName(),
                 input.getAge(),
@@ -34,7 +35,7 @@ public class CustomerService {
         return customer;
     }
 
-    public String annexHouseInfoToCustomer(@RequestBody @Valid AddressInput input, UUID customerId){
+    public String annexHouseInfoToCustomer(@RequestBody @Valid AddressInput input, String customerId){
         Customer customer = repository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         Address address = Address.declareAddress(
                 input.getZipCode(),
@@ -49,7 +50,7 @@ public class CustomerService {
         return "Address annexed to customer profile";
     }
 
-    public String annexVehicleInfo(@RequestBody @Valid VehicleInfoInput input, UUID customerId) {
+    public String annexVehicleInfo(@RequestBody @Valid VehicleInfoInput input, String customerId) {
         Customer customer = repository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer not found"));
         VehicleInfo vehicleInfo = VehicleInfo.declareAutoInfo(
                 input.getDriverLicenseCode(),

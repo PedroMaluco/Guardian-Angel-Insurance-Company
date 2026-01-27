@@ -16,7 +16,7 @@ public class Customer {
     // This class is the aggregate root
     // Usual customer data
     @Id
-    private UUID id;
+    private String id;
     private String firstName;
     private String surName;
     private Integer age;
@@ -30,11 +30,11 @@ public class Customer {
     private VehicleInfo  vehicleInfo;
 
     public static Customer newCustomer
-            (String firstName, String surName, Integer age, String birthDate, Integer socialSecurityNumber, String gender)
+            (String id, String firstName, String surName, Integer age, String birthDate, Integer socialSecurityNumber, String gender)
     {
         Customer customer = new Customer();
-        customer.setId(UUID.randomUUID());
-        customer.setFirstName((firstName));
+        customer.setId(id);
+        customer.setFirstName(firstName);
         customer.setSurName(surName);
         customer.setAge(age);
         customer.setBirthDate(birthDate);
