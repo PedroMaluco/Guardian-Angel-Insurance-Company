@@ -3,10 +3,7 @@ server:
 spring:
   data:
     mongodb:
-      username: pedro
-      password: pedro
-      host: localhost
-      port: 27017
-      database: customer
-      authentication-database: admin
-      uuid-representation: standard
+      uri: mongodb://customer_api:customer_pwd@localhost:27017/customer?authSource=customer
+    logging:
+      level:
+        org.mongodb.driver: DEBUG
