@@ -4,8 +4,8 @@ db = db.getSiblingDB("admin");
 
 db.createUser({
     user: "customer_api",
-    pwd: "customer_pass",
+    pwd: "customer_pwd",
     roles: [
-        { role: "readWrite", db: "customer_db" }
+        { role: "readWrite", db: "customer" }
     ]
 });
