@@ -4,11 +4,4 @@ spring:
   data:
     mongodb:
       uri: mongodb://customer_api:customer_pwd@localhost:27017/customer?authSource=admin
-logging:
-  level:
-    org.mongodb.driver: DEBUG
-management:
-  endpoints:
-    web:
-      exposure:
-        include: env,health
+      database: customer
